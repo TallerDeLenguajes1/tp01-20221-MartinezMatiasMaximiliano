@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Trabajo Practico 01</h1>
+    <hr />
+    <h2>Problema 1: Recibe un numero y calcula su cuadrado</h2>
+
+    <form asp-action="Problema1" method="post">
+        <label>Ingrese un numero</label>
+        <input type="text" name="_a" value="" />
+        <input id="Submit1" type="submit" value="enviar" />
+    </form>
+
+    <hr />
+    <h2>Problema 2: Recibe 2 numeros y realiza una division</h2>
+    <form asp-action="Problema2" method="post">
+        <label>Ingrese un dividendo</label>
+        <input type="text" name="_a" value="" />
+        <br />
+        <label>Ingrese un divisor</label>
+        <input type="text" name="_b" value="" />
+        <input id="Submit1" type="submit" value="enviar" />
+    </form>
+
+    <hr />
+    <h2>Problema 3: Recibe una API y muestra un listado de provincias</h2>
+
+    <hr />
+    <h2>Problema 4: Recibe Kilometros y litros usados, y calcula KM/L</h2>
+    <form asp-action="Problema4" method="post">
+        <label>KM viajados</label>
+        <input type="text" name="_Km" value="" />
+        <br />
+        <label>Litros consumidos</label>
+        <input type="text" name="_L" value="" />
+        <input id="Submit1" type="submit" value="enviar" />
+    </form>
+</div>
