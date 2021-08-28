@@ -5,7 +5,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Net;
 using TrabajoPractico1.Models;
+using System.IO;
+using System.Text.Json;
 
 namespace TrabajoPractico1.Controllers
 {
@@ -60,6 +63,54 @@ namespace TrabajoPractico1.Controllers
             {
                 return $"Uno de los valores ingresados no es un numero! {e.Message}";
             }
+        }
+
+        public string Problema3()
+        {
+            try
+            {
+                string urlapi = $"https://apis.datos.gob.ar/georef/api/provincias?campos=id,nombre";
+
+                var request = (HttpWebRequest)WebRequest.Create(urlapi);
+                request.Method = "GET";
+                request.ContentType = "application/json";
+                request.Accept = "application/json";
+
+                using (WebResponse response = request.GetResponse())
+                {
+                    using (Stream strReader = response.GetResponseStream())
+                    {
+                        if (strReader != null)
+                        {
+                            using (StreamReader reader = new StreamReader(strReader))
+                            {
+                                string responseBody = reader.ReadToEnd();
+                                ProvinciaArgentina ListProvincias = JsonSerializer.Deserialize<ProvinciaArgentina>(responseBody);
+
+                                string aux = "";
+                                foreach (Provincia item in ListProvincias.Provincias)
+                                {
+                                    aux += $"[ID:{item.Id} || Nombre:{item.Nombre}]\n";
+                                }
+                                return aux;
+                            }
+                        }
+                        else
+                        {
+                            return "Respuesta nula de servidor";
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return "Se produjo un error";
+                
+            }
+            
+
+           
+
         }
 
         public string Problema4(string _Km, string _L) 
